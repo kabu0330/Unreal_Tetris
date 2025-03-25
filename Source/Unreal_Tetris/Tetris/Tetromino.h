@@ -32,8 +32,8 @@ protected:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
-	USceneComponent* SceneComponent = nullptr;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
+	//USceneComponent* SceneComponent = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* Tetromino = nullptr;

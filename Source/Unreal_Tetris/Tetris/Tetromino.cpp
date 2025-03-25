@@ -11,12 +11,14 @@ ATetromino::ATetromino()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
-	RootComponent = SceneComponent;
+	//SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+	//RootComponent = SceneComponent;
 
 	Tetromino = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Tetromino"));
-	Tetromino->SetupAttachment(SceneComponent);
+	RootComponent = Tetromino;
+	//Tetromino->SetupAttachment(SceneComponent);
 	
+
 	SetActorEnableCollision(true);
 
 	Tetromino->SetNotifyRigidBodyCollision(true);
@@ -33,11 +35,11 @@ void ATetromino::SetTetromino(int32 Index)
 		Tetromino->SetStaticMesh(Tetrominos[Index]);
 		
 		// 메시 바닥 기준으로 로컬 중점 조정
-		FVector MinBounds, MaxBounds;
-		Tetromino->GetLocalBounds(MinBounds, MaxBounds);
-		FVector Offset = FVector(0, 0, -MinBounds.Z); 
+		//FVector MinBounds, MaxBounds;
+		//Tetromino->GetLocalBounds(MinBounds, MaxBounds);
+		//FVector Offset = FVector(0, 0, -MinBounds.Z); 
 
-		Tetromino->SetRelativeLocation(Offset);
+		//Tetromino->SetRelativeLocation(Offset);
 	}
 }
 
