@@ -4,6 +4,8 @@
 #include "Tetris/Tetromino.h"
 #include <Tetris/Floor.h>
 #include "Components/BoxComponent.h"
+#include <Engine/World.h>
+#include <Kismet/GameplayStatics.h>
 
 // Sets default values
 ATetromino::ATetromino()
@@ -11,21 +13,12 @@ ATetromino::ATetromino()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
-	//RootComponent = SceneComponent;
+	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+	RootComponent = SceneComponent;
 
 	Tetromino = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Tetromino"));
-	RootComponent = Tetromino;
-	//Tetromino->SetupAttachment(SceneComponent);
+	//RootComponent = Tetromino;
 	
-
-	SetActorEnableCollision(true);
-
-	Tetromino->SetNotifyRigidBodyCollision(true);
-	Tetromino->SetGenerateOverlapEvents(true);
-	Tetromino->SetCollisionProfileName(TEXT("BlockAll"));
-
-	Tetromino->OnComponentHit.AddDynamic(this, &ATetromino::OnHit);
 }
 
 void ATetromino::SetTetromino(int32 Index)
@@ -48,6 +41,27 @@ void ATetromino::BeginPlay()
 {
 	Super::BeginPlay();
 
+	StartTimer();
+}
+
+void ATetromino::StartTimer()
+{
+	FTimerDelegate TimerDelegate;
+
+	TimerDelegate.BindUFunction(this, FName(TEXT("DropBlock")));
+
+	//GetWorld()->GetTimerManager().SetTimer(
+	//	TimerHandle,
+	//	this,
+	//	&ATetromino::DropBlock, // 호출할 함수
+	//	DroppingTimer, // N초 후 호출 시작
+	//	true  // 반복 호출 여부
+	//);
+}
+
+void ATetromino::DropBlock()
+{
+	Move(FVector(0, 0, -1));
 }
 
 // Called every frame
@@ -59,14 +73,15 @@ void ATetromino::Tick(float DeltaTime)
 
 void ATetromino::Move(FVector Direction)
 {
+	if (false == bIsDropping)
+	{
+		return;
+	}
+
 	float Value = 100.0f;
 	FVector Pos = GetActorLocation();
-	bool bHit = SetActorLocation(Pos + FVector(0.0f, Direction.Y * Value, Direction.Z * Value));
+	SetActorLocation(Pos + FVector(0.0f, Direction.Y * Value, Direction.Z * Value));
 
-	if (true == bHit)
-	{
-		bIsLanded = true;
-	}
 }
 
 void ATetromino::Rotate()
@@ -75,12 +90,4 @@ void ATetromino::Rotate()
 	AddActorLocalRotation(Rotation);
 }
 
-void ATetromino::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
-{
-	if (true == OtherComp->IsA(AFloor::StaticClass()))
-	{
-		FVector Pos = GetActorLocation();
-		SetActorLocation({ Pos.X, Pos.Y, 0.0f });
-	}
-}
 

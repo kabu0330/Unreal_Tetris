@@ -20,9 +20,12 @@ public:
 	void Move(FVector Direction);
 	void Rotate();
 
+	void StartTimer();
+
 	UFUNCTION(BlueprintCallable)
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
-		UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	void DropBlock();
+
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,9 +34,10 @@ protected:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+
 private:
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
-	//USceneComponent* SceneComponent = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
+	USceneComponent* SceneComponent = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* Tetromino = nullptr;
@@ -41,5 +45,12 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
 	TArray<UStaticMesh*> Tetrominos;
 
-	bool bIsLanded = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
+	FTimerHandle TimerHandle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
+	float DropSpeedTime = 1.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
+	bool bIsDropping = true; 
 };

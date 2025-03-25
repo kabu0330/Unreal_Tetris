@@ -20,7 +20,7 @@ void UTetrominoManager::SpawnTetromino(TSubclassOf<ATetromino> BPTetromino)
 	if (nullptr != BPTetromino)
 	{
 		ATetromino* NewTetromino = GetWorld()->SpawnActor<ATetromino>(BPTetromino);
-		NewTetromino->SetActorLocation(FVector(0, 0, 500));
+		NewTetromino->SetActorLocation(FVector(0, 0, 1000));
 		NewTetromino->SetTetromino(2);
 
 		ATetrominoPlayerController* PC = Cast<ATetrominoPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
