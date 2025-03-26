@@ -15,21 +15,21 @@ UTetrominoManager::UTetrominoManager()
 	// ...
 }
 
-void UTetrominoManager::SpawnTetromino(TSubclassOf<ATetromino> BPTetromino)
+void UTetrominoManager::SpawnTetromino(TSubclassOf<ATetromino> BPTetromino, FVector Pos)
 {
-	if (nullptr != BPTetromino)
-	{
-		ATetromino* NewTetromino = GetWorld()->SpawnActor<ATetromino>(BPTetromino);
-		NewTetromino->SetActorLocation(FVector(0, 0, 1000));
-		NewTetromino->SetTetromino(2);
+	//if (nullptr != BPTetromino)
+	//{
+	//	ATetromino* NewTetromino = GetWorld()->SpawnActor<ATetromino>(BPTetromino);
+	//	NewTetromino->SetActorLocation(Pos);
+	//	//NewTetromino->SetTetromino(2);
+	//	Tetrominos.Add(NewTetromino);
 
-		ATetrominoPlayerController* PC = Cast<ATetrominoPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
-		if (nullptr != PC)
-		{
-			PC->CotrolledTetromino(NewTetromino);
-		}
-
-	}
+	//	ATetrominoPlayerController* PC = Cast<ATetrominoPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
+	//	if (nullptr != PC)
+	//	{
+	//		PC->CotrolledTetromino(NewTetromino);
+	//	}
+	//}
 }
 
 

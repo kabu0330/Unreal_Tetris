@@ -5,6 +5,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include <Tetris/Tetromino.h>
+#include <Tetris/NewTetromino.h>
 
 ATetrominoPlayerController::ATetrominoPlayerController()
 {
@@ -40,8 +41,9 @@ void ATetrominoPlayerController::MoveLeft()
 {
 	if (nullptr != Tetromino)
 	{
-		FVector Dir(0, -1, 0);
-		Tetromino->Move(Dir);
+		Tetromino->InputMoveLeftToBP();
+		//FVector Dir(0, -1, 0);
+		//Tetromino->Move(Dir);
 	}
 }
 
@@ -49,8 +51,9 @@ void ATetrominoPlayerController::MoveRight()
 {
 	if (nullptr != Tetromino)
 	{
-		FVector Dir(0, 1, 0);
-		Tetromino->Move(Dir);
+		Tetromino->InputMoveRightToBP();
+		//FVector Dir(0, 1, 0);
+		//Tetromino->Move(Dir);
 	}
 }
 
@@ -58,7 +61,8 @@ void ATetrominoPlayerController::Rotate()
 {
 	if (nullptr != Tetromino)
 	{
-		Tetromino->Rotate();
+		Tetromino->InputRotationToBP();
+		//Tetromino->Rotate();
 	}
 }
 
@@ -66,7 +70,8 @@ void ATetrominoPlayerController::MoveDown()
 {
 	if (nullptr != Tetromino)
 	{
-		FVector Dir(0, 0, -1);
-		Tetromino->Move(Dir);
+		Tetromino->InputMoveDownToBP();
+		//FVector Dir(0, 0, -1);
+		//Tetromino->Move(Dir);
 	}
 }

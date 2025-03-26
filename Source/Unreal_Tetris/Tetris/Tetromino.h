@@ -34,6 +34,8 @@ protected:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void Drop();
+
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))

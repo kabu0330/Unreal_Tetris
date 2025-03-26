@@ -17,7 +17,8 @@ public:
 	// Sets default values for this component's properties
 	UTetrominoManager();
 
-	void SpawnTetromino(TSubclassOf<ATetromino> BPTetromino);
+	UFUNCTION(BlueprintCallable)
+	void SpawnTetromino(TSubclassOf<ATetromino> BPTetromino, FVector Pos);
 
 protected:
 	// Called when the game starts

@@ -61,7 +61,14 @@ void ATetromino::StartTimer()
 
 void ATetromino::DropBlock()
 {
-	Move(FVector(0, 0, -1));
+	if (false == bIsDropping)
+	{
+		return;
+	}
+
+	float Value = 100.0f;
+	FVector Pos = GetActorLocation();
+	SetActorLocation(Pos + FVector(0.0f, 0, -Value));
 }
 
 // Called every frame

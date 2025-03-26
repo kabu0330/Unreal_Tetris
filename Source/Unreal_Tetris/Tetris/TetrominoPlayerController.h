@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "InputMappingContext.h"
+#include <Tetris/NewTetromino.h>
 #include "TetrominoPlayerController.generated.h"
 
 /**
@@ -18,7 +19,7 @@ class UNREAL_TETRIS_API ATetrominoPlayerController : public APlayerController
 public:
 	ATetrominoPlayerController();
 
-	void CotrolledTetromino(class ATetromino* Block)
+	void CotrolledTetromino(ANewTetromino* Block)
 	{
 		Tetromino = Block;
 	}
@@ -47,6 +48,6 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tetris", meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext* InputMappingContext = nullptr;
 
-	class ATetromino* Tetromino = nullptr;
+	ANewTetromino* Tetromino = nullptr;
 	
 };
